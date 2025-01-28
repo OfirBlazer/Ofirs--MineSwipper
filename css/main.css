@@ -9,13 +9,12 @@ div {
     
 }
 table {
-    /* width: 200px; */
     text-align: center;
     background-color: aqua;
     margin: auto;
 
     font-size: 60px;
-     ;
+     
 }
 td{
     height: 100px;

@@ -129,6 +129,7 @@ function onCellClicked(elCell, i, j) {
   cell.isShown = true
   console.log(cell);
   renderBoard(gBoard)
+  // var paint =document.querySelector(td)
   // console.log(i, j);
 
   // console.table(gBoard);
