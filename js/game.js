@@ -13,14 +13,19 @@ var gGame = {
 
 const MINE = "🧨";
 const BLOCK = "block";
-
+var lives = 3
 function oninit() {
+  lives = 3
+  
   // console.log("hi");
   // var cellClass
   buildBoard();
   setMinesNegsCount(2, 1, gBoard);
-  
   renderBoard(gBoard);
+  checkGameOver()
+  if (lives === 0){
+    return checkGameOver()
+  }
   
 }
 
@@ -42,9 +47,11 @@ function buildBoard() {
       // gBoard[i][j].isShown = true;
     }
   }
-  
-  gBoard[1][2].isMine = true;
-  gBoard[2][2].isMine = true;
+  // randomMine()
+  randomMine()
+  // gBoard[randNum][randNum].isMine = true;
+  // gBoard[2][2].isMine = true;
+  // gBoard[1][2].isMine = true;
 
   return board;
 }
@@ -123,13 +130,25 @@ function getMinesCount(pos) {
 }
 ////// count boomb negi
 
-onCellClicked();
 function onCellClicked(elCell, i, j) {
+  
   var cell = gBoard[i][j]
+  if (cell.isMine){
+    lives--
+    
+    console.log(lives);
+    document.querySelector('h2 span').innerText =lives
+  }
+   if (lives === 0){
+     checkGameOver()
+    console.log ('no lives left')
+return
+   }
   cell.isShown = true
   console.log(cell);
+
+  
   renderBoard(gBoard)
-  // var paint =document.querySelector(td)
   // console.log(i, j);
 
   // console.table(gBoard);
@@ -137,5 +156,65 @@ function onCellClicked(elCell, i, j) {
 function onCellMarcked(elCell) {
   ///// on right click
 }
-function checkGameOver() {}
+function checkGameOver(){
+
+
+  
+}
+    
+
 function expandShown(board, elCell) {}
+
+
+
+
+
+function randomMine(board){
+  console.log();
+  for (var i = 0; i <gLevel.MINES; i++){
+
+    var size = gLevel.SIZE
+    
+    var randNum1 = getRandomInt(0,size)
+    var randNum2 = getRandomInt(0,size)
+    
+    if (gBoard[randNum1][randNum2].isMine !== true){
+
+      gBoard[randNum1][randNum2].isMine = true;
+    }
+      else {
+        var randomNum1 = getRandomInt(0,size)
+        var randomnum2 =getRandomInt(0,size)
+      if (randomNum1 !== randNum1){
+        if(randomnum2 !== randNum2)
+        gBoard[randomNum1][randomnum2].isMine = true;
+      else {
+        var randomNum1 = getRandomInt(0,size)
+        var randomnum2 =getRandomInt(0,size)
+        gBoard[randomNum1][randomnum2].isMine = true;
+
+      }
+      }
+    }
+      
+  
+      
+      
+      
+        
+        
+      }
+        
+      }
+      // console.log(size);
+      
+    
+
+
+  
+
+function getRandomInt(min, max) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+}
