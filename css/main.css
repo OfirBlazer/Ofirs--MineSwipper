@@ -10,19 +10,21 @@ div {
 }
 table {
     text-align: center;
-    background-color: aqua;
+    background-color:#1D3557
+    ;
     margin: auto;
-
+    
     font-size: 60px;
-     
+    border-radius: 20px;
 }
 td{
     height: 100px;
     width: 100px;
-    background-color: rgb(35, 112, 112);
+    background-color: #F9C8D9;
+    border-radius: 10px;
 }
 td:hover {
-    background-color: rgb(68, 129, 129);
+    background-color:#7D7F7D;
     cursor: pointer;
 }
 .restart{
