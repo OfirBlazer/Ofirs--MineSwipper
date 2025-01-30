@@ -2,7 +2,7 @@ var gBoard = [];
 ("use strict");
 var gLevel = {
   SIZE: 4,
-  MINES:2
+  MINES:1,
 };
 var gGame = {
   isOn: false,
