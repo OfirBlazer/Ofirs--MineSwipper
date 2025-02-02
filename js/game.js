@@ -2,7 +2,7 @@ var gBoard = [];
 ("use strict");
 var gLevel = {
   SIZE: 4,
-  MINES:1,
+  MINES:2,
 };
 var gGame = {
   isOn: false,
@@ -14,7 +14,13 @@ var gGame = {
 const MINE = "🧨";
 const BLOCK = "block";
 var lives = 3
-function oninit() {
+function oninit(size = 4 , boombs=2) {
+
+  gLevel.SIZE = size 
+  gLevel.MINES = boombs
+
+  console.log(size);
+  console.log(boombs);
   
   lives = 3
   document.querySelector('h2 span').innerText = lives
@@ -23,9 +29,9 @@ console.log();
   var emoji = document.querySelector('.restart')
   
      emoji.innerText = '😃' 
-  buildBoard();
+  buildBoard(size , boombs);
   setMinesNegsCount(2, 1, gBoard);
-  renderBoard(gBoard);
+  renderBoard(size,gBoard);
   checkGameOver()
   if (lives === 0){
     return checkGameOver()
@@ -33,8 +39,10 @@ console.log();
   
 }
 
-function buildBoard() {
-  var size = gLevel.SIZE; ////// גודל הלוח
+function buildBoard(size , boombs) {
+  // var size = gLevel.SIZE; ////// גודל הלוח
+  // console.log(size);
+  
   const board = createMat(size, size);
 
   for (var i = 0; i < board.length; i++) {
@@ -60,10 +68,9 @@ function buildBoard() {
   return board;
 }
 
-function renderBoard(board) {
+function renderBoard(size,board) {
   console.log(board);
   
-  var size = gLevel.SIZE;
   var strHTML = "<table><tbody>";
   for (var i = 0; i < size; i++) {
     strHTML += "<tr>";
@@ -88,6 +95,7 @@ function renderBoard(board) {
     }
 
     strHTML += "</tr>";
+    
   }
   strHTML += `</tbody></table>`;
   // console.log(strHTML);
@@ -127,7 +135,11 @@ function getMinesCount(pos) {
       var currCell = gBoard[i][j];
       // console.log(currCell);
       if (currCell.isMine) {
-        counter ++
+        counter++
+        console.log(currCell.isMine);
+        
+        // console.log(counter);
+        
       }
     }
   }
@@ -137,6 +149,7 @@ function getMinesCount(pos) {
 ////// count boomb negi
 
 function onCellClicked(elCell, i, j) {
+
   var cell = gBoard[i][j] 
   cell.isShown = true
   console.log(cell);
@@ -164,7 +177,6 @@ function onCellClicked(elCell, i, j) {
     
     
   }
-  renderBoard(gBoard)
   
   function onCellMarcked(elCell) {
     ///// on right click
@@ -191,6 +203,7 @@ function expandShown(board, elCell) {}
 function randomMine(board) {
   const size = gLevel.SIZE;
   const mines = gLevel.MINES;
+  
 
   var minesCounter = 0;
 
